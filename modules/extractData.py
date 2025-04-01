@@ -7,6 +7,7 @@ class extractor:
     def __init__(self):
         self._from_csv = None
         self._from_excel = None
+        self._from_excel_pd = None
     
         root = tk.Tk()
         root.withdraw()
@@ -36,7 +37,7 @@ class extractor:
     @from_excel.setter
     def from_excel(self, sheet_name: str):
         file_path = filedialog.askopenfilename(
-            title="Select CSV file Source",
+            title="Select Excel file Source",
             filetypes=(("Excel files", "*.xlsx"), ("all files", "*.*"))
         )
         
@@ -46,3 +47,21 @@ class extractor:
         wb = load_workbook(file_path, data_only=True)
         ws = wb[sheet_name]
         self._from_excel = pd.DataFrame(ws.values)
+        
+    @property
+    def from_excel_pd(self):
+        return self._from_excel_pd
+    
+    @from_excel_pd.setter
+    def from_excel_pd(self, sheetname):
+        file_path = filedialog.askopenfilename(
+            title="select Excel file source",
+            filetypes=(("Excel files", "*.xlsx"), ("all files", "*.*"))
+        )
+        
+        if not file_path:
+            raise ValueError("No file selected")
+        
+        wb = pd.ExcelFile(file_path)
+        df = wb.parse(sheetname)
+        self._from_excel_pd = df
