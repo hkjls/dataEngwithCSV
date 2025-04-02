@@ -17,7 +17,7 @@ class extractor:
         return self._from_csv
     
     @from_csv.setter
-    def from_csv(self, r) -> classmethod:
+    def from_csv(self, r):
         file_path = filedialog.askopenfilename(
             title="Select CSV file Source",
             filetypes=(("csv files", "*.csv"), ("all files", "*.*"))
@@ -27,7 +27,7 @@ class extractor:
             raise ValueError("No file selected")
         
         if type(file_path) == str:
-            data = pd.read_csv(file_path, sep=";", names = range(r))
+            data = pd.read_csv(file_path, sep=";", header=r)
             self._from_csv = data
             
     @property

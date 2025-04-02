@@ -145,3 +145,13 @@ PARAMETERS =[
         "colonne":2
     }
 ]
+
+def get_param_value(param_name) -> object:
+    param = list(filter(lambda x:x["name"] == param_name, PARAMETERS))
+    if len(param) <=0:
+        return {
+            "name":"Parameter Unidentify",
+            "ligne":0,
+            "colonne":0
+        }
+    return param[0]
