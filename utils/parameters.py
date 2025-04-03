@@ -155,3 +155,13 @@ def get_param_value(param_name) -> object:
             "colonne":0
         }
     return param[0]
+
+def steps(limit:int, step:int) -> list:
+    s, l = 0, 0
+    steps = []
+    while l<limit:
+        steps.append(s)
+        s = step + s
+        l = l + 1
+    
+    return steps
