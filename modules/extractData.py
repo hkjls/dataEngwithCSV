@@ -8,6 +8,15 @@ class extractor:
         self._from_csv = None
         self._from_excel = None
         self._from_excel_pd = None
+        
+        self.excel_file_path = filedialog.askopenfilename(
+            title="Select Excel file Source",
+            filetypes=(("Excel files", "*.xlsx"), ("all files", "*.*"))
+        )
+        self.csv_file_path = filedialog.askopenfilename(
+            title="Select CSV file Source",
+            filetypes=(("csv files", "*.csv"), ("all files", "*.*"))
+        )
     
         root = tk.Tk()
         root.withdraw()
@@ -18,16 +27,8 @@ class extractor:
     
     @from_csv.setter
     def from_csv(self, r):
-        file_path = filedialog.askopenfilename(
-            title="Select CSV file Source",
-            filetypes=(("csv files", "*.csv"), ("all files", "*.*"))
-        )
-        
-        if not file_path:
-            raise ValueError("No file selected")
-        
-        if type(file_path) == str:
-            data = pd.read_csv(file_path, sep=";", header=r)
+        if type(self.csv_file_path) == str:
+            data = pd.read_csv(self.csv_file_path, sep=";", header=r)
             self._from_csv = data
             
     @property
@@ -36,15 +37,7 @@ class extractor:
     
     @from_excel.setter
     def from_excel(self, sheet_name: str):
-        file_path = filedialog.askopenfilename(
-            title="Select Excel file Source",
-            filetypes=(("Excel files", "*.xlsx"), ("all files", "*.*"))
-        )
-        
-        if not file_path:
-            raise ValueError("No file selected")
-        
-        wb = load_workbook(file_path, data_only=True)
+        wb = load_workbook(self.excel_file_path, data_only=True)
         ws = wb[sheet_name]
         self._from_excel = pd.DataFrame(ws.values)
         
@@ -53,15 +46,7 @@ class extractor:
         return self._from_excel_pd
     
     @from_excel_pd.setter
-    def from_excel_pd(self, sheetname):
-        file_path = filedialog.askopenfilename(
-            title="select Excel file source",
-            filetypes=(("Excel files", "*.xlsx"), ("all files", "*.*"))
-        )
-        
-        if not file_path:
-            raise ValueError("No file selected")
-        
-        wb = pd.ExcelFile(file_path)
+    def from_excel_pd(self, sheetname):        
+        wb = pd.ExcelFile(self.excel_file_path)
         df = wb.parse(sheetname)
         self._from_excel_pd = df

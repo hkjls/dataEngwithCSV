@@ -78,5 +78,35 @@ def main():
     df = pd.DataFrame.from_dict(info_machines, orient="index")
     print(df)
     
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    #Delete old data in Excel file and insert new data
+    # filename = handle.set_filename("*.xlsx")
+    # handle.Delete(filename=filename, sheetName="Collage saturne")
+    # handle.Insert(dt=csv, targetfile=filename, sheet_name="Collage saturne")
+    
+    #Extract Data evaluated from Excel
+    # # extract.from_excel = "calcul (2)"
+    # excel = extract.from_excel
+    
+    # print(excel)
+    
+    # extract.from_excel_pd = "Collage saturne"
+    # dt = extract.from_excel_pd
+    
+    # print(dt)
 if __name__ == "__main__":
     main()
