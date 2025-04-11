@@ -50,3 +50,14 @@ class extractor:
         wb = pd.ExcelFile(self.excel_file_path)
         df = wb.parse(sheetname)
         self._from_excel_pd = df
+        
+if __name__ == "__main__":
+    extract = extractor()
+    extract.from_csv = 5
+    extract.from_excel = "quotidien machine" 
+    
+    csv_data = extract.from_csv
+    excel_data = extract.from_excel
+    
+    print(excel_data)
+    

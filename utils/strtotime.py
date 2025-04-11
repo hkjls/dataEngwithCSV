@@ -31,11 +31,9 @@ class setTime:
         s = s*60
         strtime = "%02d:%02d:%02d" % (h, min, s)
         return strtime
-    
-    def floattotime(self, floatTime)-> datetime:
-        
-        return
 
 
 if __name__ == "__main__":
-    print(setTime().timetostr(0.90))
+    print(setTime().strtoday("23:00:00")) # str time to n day
+    print(setTime().timetostr(2.52)) # hour (float) to time
+    print(setTime().strtimetosecond("23:00:00")) # str time to seconde
